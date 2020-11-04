@@ -1,0 +1,37 @@
+C:\Users\wolfs\source\repos\Hue Party Simulator\Hue Party Simulator\bin\Debug\Hue Party Simulator.exe.config
+C:\Users\wolfs\source\repos\Hue Party Simulator\Hue Party Simulator\bin\Debug\Hue Party Simulator.exe
+C:\Users\wolfs\source\repos\Hue Party Simulator\Hue Party Simulator\bin\Debug\Hue Party Simulator.pdb
+C:\Users\wolfs\source\repos\Hue Party Simulator\Hue Party Simulator\obj\Debug\Hue Party Simulator.csprojAssemblyReference.cache
+C:\Users\wolfs\source\repos\Hue Party Simulator\Hue Party Simulator\obj\Debug\MainWindow.g.cs
+C:\Users\wolfs\source\repos\Hue Party Simulator\Hue Party Simulator\obj\Debug\App.g.cs
+C:\Users\wolfs\source\repos\Hue Party Simulator\Hue Party Simulator\obj\Debug\Hue Party Simulator_MarkupCompile.cache
+C:\Users\wolfs\source\repos\Hue Party Simulator\Hue Party Simulator\obj\Debug\Hue Party Simulator_MarkupCompile.lref
+C:\Users\wolfs\source\repos\Hue Party Simulator\Hue Party Simulator\obj\Debug\App.baml
+C:\Users\wolfs\source\repos\Hue Party Simulator\Hue Party Simulator\obj\Debug\MainWindow.baml
+C:\Users\wolfs\source\repos\Hue Party Simulator\Hue Party Simulator\obj\Debug\Hue Party Simulator.g.resources
+C:\Users\wolfs\source\repos\Hue Party Simulator\Hue Party Simulator\obj\Debug\Hue_Party_Simulator.Properties.Resources.resources
+C:\Users\wolfs\source\repos\Hue Party Simulator\Hue Party Simulator\obj\Debug\Hue Party Simulator.csproj.GenerateResource.cache
+C:\Users\wolfs\source\repos\Hue Party Simulator\Hue Party Simulator\obj\Debug\Hue Party Simulator.csproj.CoreCompileInputs.cache
+C:\Users\wolfs\source\repos\Hue Party Simulator\Hue Party Simulator\obj\Debug\Hue Party Simulator.exe
+C:\Users\wolfs\source\repos\Hue Party Simulator\Hue Party Simulator\obj\Debug\Hue Party Simulator.pdb
+C:\Users\wolfs\source\repos\Hue Party Simulator\Hue Party Simulator\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\wolfs\source\repos\Hue Party Simulator\Hue Party Simulator\bin\Debug\System.Buffers.dll
+C:\Users\wolfs\source\repos\Hue Party Simulator\Hue Party Simulator\bin\Debug\System.Memory.dll
+C:\Users\wolfs\source\repos\Hue Party Simulator\Hue Party Simulator\bin\Debug\System.Net.Http.Json.dll
+C:\Users\wolfs\source\repos\Hue Party Simulator\Hue Party Simulator\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\wolfs\source\repos\Hue Party Simulator\Hue Party Simulator\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\wolfs\source\repos\Hue Party Simulator\Hue Party Simulator\bin\Debug\System.Text.Encodings.Web.dll
+C:\Users\wolfs\source\repos\Hue Party Simulator\Hue Party Simulator\bin\Debug\System.Text.Json.dll
+C:\Users\wolfs\source\repos\Hue Party Simulator\Hue Party Simulator\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\wolfs\source\repos\Hue Party Simulator\Hue Party Simulator\bin\Debug\System.ValueTuple.dll
+C:\Users\wolfs\source\repos\Hue Party Simulator\Hue Party Simulator\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Users\wolfs\source\repos\Hue Party Simulator\Hue Party Simulator\bin\Debug\System.Buffers.xml
+C:\Users\wolfs\source\repos\Hue Party Simulator\Hue Party Simulator\bin\Debug\System.Memory.xml
+C:\Users\wolfs\source\repos\Hue Party Simulator\Hue Party Simulator\bin\Debug\System.Net.Http.Json.xml
+C:\Users\wolfs\source\repos\Hue Party Simulator\Hue Party Simulator\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\wolfs\source\repos\Hue Party Simulator\Hue Party Simulator\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\wolfs\source\repos\Hue Party Simulator\Hue Party Simulator\bin\Debug\System.Text.Encodings.Web.xml
+C:\Users\wolfs\source\repos\Hue Party Simulator\Hue Party Simulator\bin\Debug\System.Text.Json.xml
+C:\Users\wolfs\source\repos\Hue Party Simulator\Hue Party Simulator\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\wolfs\source\repos\Hue Party Simulator\Hue Party Simulator\bin\Debug\System.ValueTuple.xml
+C:\Users\wolfs\source\repos\Hue Party Simulator\Hue Party Simulator\obj\Debug\Hue Party Simulator.csproj.CopyComplete
