@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading;
 using System.Windows.Controls;
+using System.Collections.Generic;
 
 namespace Hue_Party_Simulator
 {
@@ -15,6 +16,8 @@ namespace Hue_Party_Simulator
     {
         // Used to control lights
         public LightControl LightController;
+        public LightControl LightControllerDefault;
+        public static List<LightControlObject> DefaultLightTemp = new List<LightControlObject>();
 
         // Used for canceling tasks that are running.
         public CancellationTokenSource tokenSource;
@@ -27,7 +30,10 @@ namespace Hue_Party_Simulator
             token = tokenSource.Token;
 
             // Initialize LightController
+            LightControllerDefault = new LightControl();
             LightController = new LightControl();
+
+            DefaultLightTemp = LightControllerDefault.AllLightInstances;
 
             InitializeComponent();
         }
@@ -60,7 +66,7 @@ namespace Hue_Party_Simulator
                     while (!token.IsCancellationRequested)
                     {
                         LightController.CycleColors();
-                        Thread.Sleep(100);
+                        Thread.Sleep(110);
 
                     }
                 }, token);
@@ -75,20 +81,9 @@ namespace Hue_Party_Simulator
 
                 // Reset the light to default and change the button content back to what it was.
                 // SendCommand is default content. This allows us to now restart the whole looping process over.
-                using (var HttpClientObject = new HttpClient()) 
-                {
-                    // URL Base
-                    HttpClientObject.BaseAddress = new Uri(LightControl.URL);
+                Thread.Sleep(600);
+                LightController.LightDefault();
 
-                    LightController.LightInstance.Bri = 77;
-                    LightController.LightInstance.Hue = 8402;
-                    LightController.LightInstance.Sat = 140;
-
-                    _ = HttpClientObject.PutAsJsonAsync("lights/1/state", LightController.LightInstance).Result;
-                    _ = HttpClientObject.PutAsJsonAsync("lights/2/state", LightController.LightInstance).Result;
-                    _ = HttpClientObject.PutAsJsonAsync("lights/4/state", LightController.LightInstance).Result;
-                    _ = HttpClientObject.PutAsJsonAsync("lights/5/state", LightController.LightInstance).Result;
-                }
                 ButtonClicked.Content = "SendCommmand";
 
                 return;

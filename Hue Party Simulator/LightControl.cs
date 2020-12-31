@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.RegularExpressions;
 using System.Windows.Documents;
+using System.Threading.Tasks;
 
 namespace Hue_Party_Simulator
 {
@@ -23,10 +24,9 @@ namespace Hue_Party_Simulator
         // List of all Light control instances/objects.
         public List<int> LightIndexValues = new List<int>();
         public List<LightControlObject> AllLightInstances = new List<LightControlObject>();
-        
-        // Light instance that we need for the controller.
-        public LightControlObject LightInstance;
+        //public List<LightControlObject> DefaultLightValues = new List<LightControlObject>(MainWindow.DefaultLightTemp);
 
+        // Vals for default/startup.
         private int SetHue = 0;       // Start Hue Value (Begin at 0)      
         private int MaxHue = 65535;   // MAX Hue Value (Begin from 0)
         private int HueStep = 5000;   // Hue to increase each loop.
@@ -50,7 +50,7 @@ namespace Hue_Party_Simulator
             //   on this project together easier.
 
             // LightInstance = new LightControlObject { On = true, Bri = 0, Sat = 0, Hue = 0 };
-            
+
             // ZW - 11/04 
             //   Yep im officially putting too much work into this but oh fuckin well.
             //   Pull back the result from the GET call of "lights" and split it/parse it 
@@ -120,58 +120,53 @@ namespace Hue_Party_Simulator
                     Sat = int.Parse(MatchesForVals.Groups[4].Value)
                 });
 
+                //Records default light values to be reset once functions run
+                //DefaultLightValues.Add(AllLightInstances[Counter-1]);
+
                 Console.WriteLine("\nADDED LIGHT TO LIST OF ALL OBJECTS!\n");
                 Counter++;
             }
-
-            // Make the light control object for the main object the first item in the list of 
-            // All Light objects.
-            LightInstance = AllLightInstances[0];
         }
-        
+
         /// <summary>
         /// Cycle light colors moron, obviously its called CycleColors
         /// </summary>
-        public async void CycleColors()
+        public void CycleColors()
         {
-            LightInstance.Bri = 254;
-            LightInstance.Sat = 254;
-
             using (var HttpClientObject = new HttpClient())
             {
                 // URL Base
                 HttpClientObject.BaseAddress = new Uri(URL);
 
-                int IndexCounter = 0;
-                foreach (var CurrentInstance in AllLightInstances)
+                //foreach (var CurrentInstance in AllLightInstances)
+                //{
+                //    SetHue = CurrentInstance.Hue + HueStep;
+                //    if (SetHue > MaxHue) { SetHue -= MaxHue; }
+                //
+                //    CurrentInstance.Hue = SetHue;
+                //
+                //    _ = HttpClientObject.PutAsJsonAsync("lights/1/state", CurrentInstance).Result;
+                //    _ = HttpClientObject.PutAsJsonAsync("lights/2/state", CurrentInstance).Result;
+                //    _ = HttpClientObject.PutAsJsonAsync("lights/4/state", CurrentInstance).Result;
+                //    _ = HttpClientObject.PutAsJsonAsync("lights/5/state", CurrentInstance).Result;
+                //} 
+
+                Parallel.ForEach(AllLightInstances, (CurrentInstance, pls, index) =>
                 {
-                    SetHue = CurrentInstance.Hue + HueStep;
-                    if (SetHue > MaxHue) { SetHue -= MaxHue; }
+                    int Indexer = (int)index;
+                    string ApiString = "lights/" + LightIndexValues[Indexer] + "/state";
 
-                    CurrentInstance.Hue = SetHue;
-
-                    string ApiStirng = "lights/" + LightIndexValues[IndexCounter] + "/state";
-                    HttpClientObject.PutAsJsonAsync(ApiStirng, CurrentInstance);
-
-                    IndexCounter++;
-                }
-
-                /* Commented Out. Try the code ive got up above^
-                _ = HttpClientObject.PutAsJsonAsync("lights/1/state", LightInstance).Result;
-                _ = HttpClientObject.PutAsJsonAsync("lights/2/state", LightInstance).Result;
-                _ = HttpClientObject.PutAsJsonAsync("lights/4/state", LightInstance).Result;
-                _ = HttpClientObject.PutAsJsonAsync("lights/5/state", LightInstance).Result;
-                */
-            }            
+                    _ = HttpClientObject.PutAsJsonAsync(ApiString, CurrentInstance).Result;
+                });
+            }
         }
 
         public async void Disco(int LightIndex = 1) // Whenever you see int PARAM = VALUE it means you dont have to pass in a value when calling it.
         {
-            // Assign a temp local object to modify here. 
-            var CurrentLight = LightInstance;
+            LightControlObject CurrentLight = null;
 
             // If we have an object in the list of all light objects that matches the current light index we requested:
-            if (LightIndexValues.Contains(LightIndex)) 
+            if (LightIndexValues.Contains(LightIndex))
             {
                 // Find the index of where the index tracker has that value.
                 int CurrentIndex = LightIndexValues.IndexOf(LightIndex);
@@ -180,6 +175,7 @@ namespace Hue_Party_Simulator
                 // INDEX OF CURRENT INDEX GIVES INDEX OF THE LIGHT WE WANT. THINK OF IT LIKE THAT.
                 CurrentLight = AllLightInstances[CurrentIndex];
             }
+            else { CurrentLight = AllLightInstances[0]; }
 
             // Set some shit.
             CurrentLight.Bri = 254;
@@ -238,22 +234,22 @@ namespace Hue_Party_Simulator
         /// <summary>
         /// Stores baseline light values
         /// </summary>
-        public async void LightDefault()
+        public void LightDefault()
         {
             using (var HttpClientObject = new HttpClient())
             {
-                //URL Base
+                // URL Base
                 HttpClientObject.BaseAddress = new Uri(URL);
 
-                //GET call for light
-                HttpResponseMessage response = await HttpClientObject.GetAsync("lights/1/state");
-
-                if (response.IsSuccessStatusCode)
+                int Counter = 0;
+                foreach (var CurrentInstance in MainWindow.DefaultLightTemp)
                 {
-                    string responseBody = await response.Content.ReadAsStringAsync();
-                    Console.WriteLine(responseBody);
+                    string ApiString = "lights/" + LightIndexValues[Counter] + "/state";
+                    
+                    _ = HttpClientObject.PutAsJsonAsync(ApiString, CurrentInstance).Result;
+                    
+                    Counter++;
                 }
-                else;
             }
         }
     }
