@@ -5,7 +5,6 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading;
 using System.Windows.Controls;
-using System.Collections.Generic;
 
 namespace Hue_Party_Simulator
 {
@@ -15,9 +14,7 @@ namespace Hue_Party_Simulator
     public partial class MainWindow : Window
     {
         // Used to control lights
-        public LightControl LightController;
-        public LightControl LightControllerDefault;
-        public static List<LightControlObject> DefaultLightTemp = new List<LightControlObject>();
+        public LightControlConsumer LightController;
 
         // Used for canceling tasks that are running.
         public CancellationTokenSource tokenSource;
@@ -30,10 +27,7 @@ namespace Hue_Party_Simulator
             token = tokenSource.Token;
 
             // Initialize LightController
-            LightControllerDefault = new LightControl();
-            LightController = new LightControl();
-
-            DefaultLightTemp = LightControllerDefault.AllLightInstances;
+            LightController = new LightControlConsumer();
 
             InitializeComponent();
         }
@@ -65,8 +59,8 @@ namespace Hue_Party_Simulator
                     // While we dont wanna cancel. This will be true till we click the button again.
                     while (!token.IsCancellationRequested)
                     {
-                        LightController.CycleColors();
-                        Thread.Sleep(110);
+                        LightController.CycleColorsOrReset();
+                        Thread.Sleep(100);
 
                     }
                 }, token);
@@ -81,11 +75,12 @@ namespace Hue_Party_Simulator
 
                 // Reset the light to default and change the button content back to what it was.
                 // SendCommand is default content. This allows us to now restart the whole looping process over.
-                Thread.Sleep(600);
-                LightController.LightDefault();
 
+                // Reset Light Values here
+                LightController.CycleColorsOrReset(true);
+
+                // Reset Sender Cmd.
                 ButtonClicked.Content = "SendCommmand";
-
                 return;
             }
         }
